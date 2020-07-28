@@ -2,11 +2,15 @@ package com.sohee.accountnote;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Account_Note.db";
+    public static final String NOTE_TABLE_NAME = "note";
+    public static final String NOTE_ID = "id";
     public static final int DATABASE_VERSION = 1;
     public static final String NOTE_TITLE = "title";
     public static final String NOTE_COST ="cost";
@@ -39,4 +43,28 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("note", null, contentValues);
         return true;
     }
+
+    public Cursor getData(int id) {
+        SQLiteDatabase  db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from note where id=" + id + "", null);
+        return res;
+    }
+
+    public int numberOfRows() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, NOTE_TABLE_NAME);
+        return numRows;
+    }
+
+    public boolean updateNote(Integer id, String title, String cost) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title", title);
+        contentValues.put("cost", cost);
+
+        db.update("note", contentValues, "id = ? ", new String[]{Integer.toString(id)});
+        return true;
+    }
+
+
 }
