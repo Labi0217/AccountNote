@@ -17,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NOTE_TITLE = "title";
     public static final String NOTE_COST ="cost";
     public static final String NOTE_CONTENT = "content1";
+    public static final String NOTE_AREA = "area";
 
 
     long mNow;
@@ -29,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table note " +
-                        "(id integer primary key,title text, cost text, content1 text)"
+                        "(id integer primary key,title text, cost text, content1 text, area text)"
         );
     }
 
@@ -39,13 +40,14 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertNote(String title, String cost, String content1) {
+    public boolean insertNote(String title, String cost, String content1, String area) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("title", title);
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
+        contentValues.put("area", area);
 
         db.insert("note", null, contentValues);
         return true;
@@ -63,12 +65,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateNote(Integer id, String title, String cost, String content1) {
+    public boolean updateNote(Integer id, String title, String cost, String content1, String area) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
+        contentValues.put("area", area);
         db.update("note", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }

@@ -82,7 +82,6 @@ public class AddPlace extends AppCompatActivity {
                 namee.setText(t);
                 coste.setText(c);
                 contente.setText(co);
-
             }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -145,7 +144,7 @@ public class AddPlace extends AppCompatActivity {
         if (extras != null) {
             int Value = extras.getInt("id");
             if (Value > 0) {
-                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString())) {
+                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), area.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
@@ -153,7 +152,7 @@ public class AddPlace extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString())) {
+                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), area.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "추가되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
