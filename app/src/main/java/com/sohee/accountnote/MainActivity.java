@@ -7,10 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.nio.Buffer;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.button)
     Button addplace;
+    @BindView(R.id.button2)
     Button findplace;
 
     @Override
@@ -20,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        addplace = (Button)findViewById(R.id.button);
-        findplace = (Button)findViewById(R.id.button2);
+
 
         addplace.setOnClickListener(new View.OnClickListener() {
             @Override

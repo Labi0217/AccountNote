@@ -25,6 +25,34 @@ public class FindPlace extends AppCompatActivity {
         setContentView(R.layout.activity_find_place);
 
         notedb = new DBHelper(this);
+
+        ArrayList array_list = notedb.getAllNote();
+
+        mAdapter =
+                new ArrayAdapter(this, android.R.layout.simple_list_item_1, array_list);
+
+        noteListView = (ListView) findViewById(R.id.List);
+        noteListView.setAdapter(mAdapter);
+
+        noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long arg4) {
+                String item = (String) ((ListView) parent).getItemAtPosition(position);
+                String[] strArray = item.split(" ");
+                int id=Integer.parseInt(strArray[0]);
+                Bundle dataBundle = new Bundle();
+                dataBundle.putInt("id", id);
+                Intent intent = new Intent(getApplicationContext(), AddPlace.class);
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+            }
+        });
+
+
+
+
         calendarView = findViewById(R.id.calendarView);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -37,6 +65,13 @@ public class FindPlace extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected void onResume() {
+        super.onResume();
+        mAdapter.clear();
+        mAdapter.addAll(notedb.getAllNote());
+        mAdapter.notifyDataSetChanged();
     }
 
 
