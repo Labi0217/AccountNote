@@ -17,11 +17,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NOTE_TITLE = "title";
     public static final String NOTE_COST ="cost";
     public static final String NOTE_CONTENT = "content1";
-    public static final String NOTE_AREA = "area";
+    public static final String NOTE_DATE = "date";
 
 
-    long mNow;
-    Date mDate;
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null,1);
     }
@@ -30,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table note " +
-                        "(id integer primary key,title text, cost text, content1 text, area text)"
+                        "(id integer primary key,title text, cost text, content1 text, date text)"
         );
     }
 
@@ -40,14 +38,14 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertNote(String title, String cost, String content1, String area) {
+    public boolean insertNote(String title, String cost, String content1, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("title", title);
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
-        contentValues.put("area", area);
+        contentValues.put("date", date);
 
         db.insert("note", null, contentValues);
         return true;
@@ -65,13 +63,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateNote(Integer id, String title, String cost, String content1, String area) {
+    public boolean updateNote(Integer id, String title, String cost, String content1, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
-        contentValues.put("area", area);
+        contentValues.put("date", date);
         db.update("note", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
@@ -96,9 +94,4 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public Date getTime() {
-        mNow = System.currentTimeMillis();
-        mDate = new Date(mNow);
-        return mDate;
-    }
 }

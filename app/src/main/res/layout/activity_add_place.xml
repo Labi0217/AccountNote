@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:weightSum="2">
         <Spinner
             android:id="@+id/spinner"
@@ -43,21 +43,20 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="30dp">
         <TextView
-            android:id="@+id/areareal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
             android:id="@+id/area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/imageView"
+            android:layout_below="@id/linear1"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_launcher_foreground" />
         <EditText
             android:id="@+id/nameE"
             android:layout_below="@id/imageView"
+            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -67,7 +66,7 @@
             android:layout_below="@id/nameE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:text="사용금액:"/>
         <EditText
             android:id="@+id/costE"
@@ -80,7 +79,7 @@
             android:layout_below="@id/costT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:text="내용:"/>
         <EditText
             android:id="@+id/contentE"
@@ -89,15 +88,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/deleteB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/saveB"
+            android:onClick="delete"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:visibility="invisible"
+            android:text="삭제"/>
+
+        <Button
             android:id="@+id/saveB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
-            android:onClick="insert"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:onClick="insert"
+            android:text="저장" />
+        <Button
+            android:id="@+id/editB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:visibility="invisible"
+            android:onClick="edit"
+            android:text="수정"/>
     </RelativeLayout>
 
 </RelativeLayout>

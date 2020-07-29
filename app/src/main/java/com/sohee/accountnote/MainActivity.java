@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-
         addplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View target) {

@@ -31,6 +31,10 @@ public class AddPlace extends AppCompatActivity {
     TextView monthdate;
     @BindView(R.id.saveB)
     Button save1;
+    @BindView(R.id.deleteB)
+    Button delete1;
+    @BindView(R.id.editB)
+    Button edit1;
     @BindView(R.id.nameE)
     EditText namee;
     @BindView(R.id.costE)
@@ -41,8 +45,6 @@ public class AddPlace extends AppCompatActivity {
     Spinner spinner;
     @BindView(R.id.area)
     TextView area;
-    @BindView(R.id.areareal)
-    TextView areareal;
     @BindView(R.id.imageView)
     ImageView image;
     int id = 0;
@@ -56,13 +58,18 @@ public class AddPlace extends AppCompatActivity {
         setContentView(R.layout.activity_add_place);
 
         ButterKnife.bind(this);
-
         Glide.with(this)
                 .load("")
                 .override(300,200)
                 .into(image);
 
         notedb = new DBHelper(this);
+
+        monthdate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getDT();
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -74,14 +81,18 @@ public class AddPlace extends AppCompatActivity {
                 String t = rs.getString(rs.getColumnIndex(DBHelper.NOTE_TITLE));
                 String c = rs.getString(rs.getColumnIndex(DBHelper.NOTE_COST));
                 String co = rs.getString(rs.getColumnIndex(DBHelper.NOTE_CONTENT));
+                String d = rs.getString(rs.getColumnIndex(DBHelper.NOTE_DATE));
                 if(!rs.isClosed()) {
                     rs.close();
                 }
                 save1.setVisibility(View.INVISIBLE);
+                delete1.setVisibility(View.VISIBLE);
+                edit1.setVisibility(View.VISIBLE);
 
                 namee.setText(t);
                 coste.setText(c);
                 contente.setText(co);
+                monthdate.setText(d);
             }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -96,37 +107,8 @@ public class AddPlace extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                areareal.setText(items[position]);
-                if(items[position] == "서울특별시") {
-                    area.setText("서울특별시");
-                } else if(items[position] == "인천광역시") {
-                    area.setText("인천광역시");
-                } else if(items[position] == "울산광역시") {
-                    area.setText("울산광역시");
-                } else if(items[position] == "충청북도") {
-                    area.setText("충청북도");
-                } else if(items[position] == "충청남도") {
-                    area.setText("충청남도");
-                } else if(items[position] == "전라북도") {
-                    area.setText("전라북도");
-                } else if(items[position] == "전라남도") {
-                    area.setText("전라남도");
-                } else if(items[position] == "광주광역시") {
-                    area.setText("광주광역시");
-                } else if(items[position] == "부산광역시") {
-                    area.setText("부산광역시");
-                } else if(items[position] == "경기도") {
-                    area.setText("경기도");
-                } else if(items[position] == "경상북도") {
-                    area.setText("경상남도");
-                } else if(items[position] == "대구광역시") {
-                    area.setText("대구광역시");
-                } else if(items[position] == "대전광역시") {
-                    area.setText("대전광역시");
-                } else if(items[position] == "강원도") {
-                    area.setText("강원도");
-                } else if(items[position] == "제주특별자치도") {
-                    area.setText("제주특별자치도");
+                if(position != 0) {
+                    area.setText(items[position]);
                 }
 
 
@@ -144,7 +126,7 @@ public class AddPlace extends AppCompatActivity {
         if (extras != null) {
             int Value = extras.getInt("id");
             if (Value > 0) {
-                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), area.getText().toString())) {
+                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
@@ -152,7 +134,7 @@ public class AddPlace extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), area.getText().toString())) {
+                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "추가되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
@@ -162,5 +144,44 @@ public class AddPlace extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    public void delete(View view) {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int Value = extras.getInt("id");
+            if (Value > 0) {
+                notedb.deleteNote(id);
+                Toast.makeText(getApplicationContext(), "삭제되었음", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "삭제되지 않았음", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void edit(View view) {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int value = extras.getInt("id");
+            if (value > 0) {
+                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+    public void getDT() {
+        Calendar cal = Calendar.getInstance();
+        int y=0, m=0, d=0, h=0, mi=0, s=0;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH) +1;
+        d = cal.get(Calendar.DAY_OF_MONTH);
+
+        monthdate.setText(y+"/"+m+"/"+d);
     }
 }
