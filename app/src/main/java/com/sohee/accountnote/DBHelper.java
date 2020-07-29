@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Account_Note.db";
     public static final String NOTE_TABLE_NAME = "note";
@@ -23,7 +25,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(
+                "create table note " +
+                        "(id integer primary key,title text, cost Text, content Text)"
+        );
     }
 
     @Override
@@ -56,14 +61,35 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateNote(Integer id, String title, String cost) {
+    public boolean updateNote(Integer id, String title, String cost, String content1) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
         contentValues.put("cost", cost);
+        contentValues.put("content1", content1);
 
         db.update("note", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
+    }
+
+    public Integer deleteNote(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("note",
+                "id = ? ",
+                new String[]{Integer.toString(id)});
+    }
+
+    public ArrayList getAllNote() {
+        ArrayList array_list = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from note", null);
+        res.moveToFirst();
+        while (res.isAfterLast() == false) {
+            array_list.add(res.getString(res.getColumnIndex(NOTE_ID))+" "+
+                    res.getString(res.getColumnIndex(NOTE_TITLE)));
+            res.moveToNext();
+        }
+        return array_list;
     }
 
 

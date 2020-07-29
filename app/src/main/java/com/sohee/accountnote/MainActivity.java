@@ -19,8 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
         addplace.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View target) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", 0);
                 Intent intent = new Intent(getApplicationContext(), AddPlace.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -30,5 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

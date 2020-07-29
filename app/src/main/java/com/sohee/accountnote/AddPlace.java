@@ -62,6 +62,7 @@ public class AddPlace extends AppCompatActivity {
                 rs.moveToFirst();
                 String t = rs.getString(rs.getColumnIndex(DBHelper.NOTE_TITLE));
                 String c = rs.getString(rs.getColumnIndex(DBHelper.NOTE_COST));
+                String co = rs.getString(rs.getColumnIndex(DBHelper.NOTE_CONTENT));
                 if(!rs.isClosed()) {
                     rs.close();
                 }
@@ -69,6 +70,8 @@ public class AddPlace extends AppCompatActivity {
                 s.setVisibility(View.INVISIBLE);
 
                 namee.setText((CharSequence) t);
+                coste.setText((CharSequence) c);
+                contente.setText((CharSequence)co);
 
             }
         }
@@ -82,15 +85,15 @@ public class AddPlace extends AppCompatActivity {
         if (extras != null) {
             int Value = extras.getInt("id");
             if (Value > 0) {
-                if (notedb.updateNote(id, namee.getText().toString(), cost.getText().toString())) {
+                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), StoragePlace.class);
+                    Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                if (notedb.insertNote(namee.getText().toString(), name.getText().toString())) {
+                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "추가되었음", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "추가되지 않았음", Toast.LENGTH_SHORT).show();
