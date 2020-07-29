@@ -45,6 +45,8 @@ public class AddPlace extends AppCompatActivity {
     Spinner spinner;
     @BindView(R.id.area)
     TextView area;
+    @BindView(R.id.address)
+    TextView address;
     @BindView(R.id.imageView)
     ImageView image;
     int id = 0;
@@ -110,9 +112,6 @@ public class AddPlace extends AppCompatActivity {
                 if(position != 0) {
                     area.setText(items[position]);
                 }
-
-
-
             }
 
             @Override

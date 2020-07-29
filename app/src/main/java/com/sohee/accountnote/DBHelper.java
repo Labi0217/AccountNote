@@ -18,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NOTE_COST ="cost";
     public static final String NOTE_CONTENT = "content1";
     public static final String NOTE_DATE = "date";
+    public static final String NOTE_LOCATION = "location";
 
 
     public DBHelper(Context context) {
