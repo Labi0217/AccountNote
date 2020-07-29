@@ -27,8 +27,8 @@ import butterknife.ButterKnife;
 
 public class AddPlace extends AppCompatActivity {
     private DBHelper notedb;
-    @BindView(R.id.textView)
-    TextView text1;
+    @BindView(R.id.monthdate)
+    TextView monthdate;
     @BindView(R.id.saveB)
     Button save1;
     @BindView(R.id.nameE)
@@ -58,7 +58,7 @@ public class AddPlace extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Glide.with(this)
-                .load("http://goo.gl/gEgYUd")
+                .load("")
                 .override(300,200)
                 .into(image);
 
