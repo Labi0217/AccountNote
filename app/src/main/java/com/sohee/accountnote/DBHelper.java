@@ -13,21 +13,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Account_Note.db";
     public static final String NOTE_TABLE_NAME = "note";
     public static final String NOTE_ID = "id";
-    public static final int DATABASE_VERSION = 1;
     public static final String NOTE_TITLE = "title";
     public static final String NOTE_COST ="cost";
     public static final String NOTE_CONTENT = "content1";
 
-
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table note " +
-                        "(id integer primary key,title text, cost Text, content Text)"
+                        "(id integer primary key,title text, cost text, content1 text)"
         );
     }
 
@@ -41,16 +39,16 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("title", title);
-        contentValues.put("cost", cost);
-        contentValues.put("content1", content1);
+        contentValues.put("country", title);
+        contentValues.put("name", cost);
+        contentValues.put("director", content1);
 
         db.insert("note", null, contentValues);
         return true;
     }
 
     public Cursor getData(int id) {
-        SQLiteDatabase  db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from note where id=" + id + "", null);
         return res;
     }
@@ -67,7 +65,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("title", title);
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
-
         db.update("note", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
@@ -91,6 +88,4 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return array_list;
     }
-
-
 }

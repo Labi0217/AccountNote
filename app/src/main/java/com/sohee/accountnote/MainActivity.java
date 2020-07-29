@@ -7,13 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
     Button addplace;
     Button findplace;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+
         addplace = (Button)findViewById(R.id.button);
         findplace = (Button)findViewById(R.id.button2);
 
