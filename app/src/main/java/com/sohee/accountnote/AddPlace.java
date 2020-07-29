@@ -12,9 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,6 +43,8 @@ public class AddPlace extends AppCompatActivity {
     TextView area;
     @BindView(R.id.areareal)
     TextView areareal;
+    @BindView(R.id.imageView)
+    ImageView image;
     int id = 0;
     String[] items = {"지역", "서울특별시", "인천광역시","울산광역시","충청북도","전라남도"
             , "부산광역시", "광주광역시", "경기도", "충청남도", "경상북도", "경상남도", "대구광역시", "대전광역시", "강원도"
@@ -52,7 +57,10 @@ public class AddPlace extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
+        Glide.with(this)
+                .load("http://goo.gl/gEgYUd")
+                .override(300,200)
+                .into(image);
 
         notedb = new DBHelper(this);
 

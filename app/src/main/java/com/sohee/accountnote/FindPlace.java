@@ -12,6 +12,7 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FindPlace extends AppCompatActivity {
     DBHelper notedb;
@@ -73,6 +74,5 @@ public class FindPlace extends AppCompatActivity {
         mAdapter.addAll(notedb.getAllNote());
         mAdapter.notifyDataSetChanged();
     }
-
 
 }

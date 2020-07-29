@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Account_Note.db";
@@ -17,6 +18,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NOTE_COST ="cost";
     public static final String NOTE_CONTENT = "content1";
 
+
+    long mNow;
+    Date mDate;
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null,1);
     }
@@ -39,9 +43,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("country", title);
-        contentValues.put("name", cost);
-        contentValues.put("director", content1);
+        contentValues.put("title", title);
+        contentValues.put("cost", cost);
+        contentValues.put("content1", content1);
 
         db.insert("note", null, contentValues);
         return true;
@@ -87,5 +91,11 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         return array_list;
+    }
+
+    public Date getTime() {
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mDate;
     }
 }
