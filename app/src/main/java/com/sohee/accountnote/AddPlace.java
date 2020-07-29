@@ -45,8 +45,8 @@ public class AddPlace extends AppCompatActivity {
     Spinner spinner;
     @BindView(R.id.area)
     TextView area;
-    @BindView(R.id.address)
-    TextView address;
+    @BindView(R.id.addressE)
+    TextView addresse;
     @BindView(R.id.imageView)
     ImageView image;
     int id = 0;
@@ -84,6 +84,7 @@ public class AddPlace extends AppCompatActivity {
                 String c = rs.getString(rs.getColumnIndex(DBHelper.NOTE_COST));
                 String co = rs.getString(rs.getColumnIndex(DBHelper.NOTE_CONTENT));
                 String d = rs.getString(rs.getColumnIndex(DBHelper.NOTE_DATE));
+                String ad = rs.getString(rs.getColumnIndex(DBHelper.NOTE_ADDRESS));
                 if(!rs.isClosed()) {
                     rs.close();
                 }
@@ -95,6 +96,7 @@ public class AddPlace extends AppCompatActivity {
                 coste.setText(c);
                 contente.setText(co);
                 monthdate.setText(d);
+                addresse.setText(ad);
             }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -125,7 +127,7 @@ public class AddPlace extends AppCompatActivity {
         if (extras != null) {
             int Value = extras.getInt("id");
             if (Value > 0) {
-                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString())) {
+                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString(), addresse.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
@@ -133,7 +135,7 @@ public class AddPlace extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString())) {
+                if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString(), addresse.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "추가되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
                     startActivity(intent);
@@ -164,7 +166,7 @@ public class AddPlace extends AppCompatActivity {
         if (extras != null) {
             int value = extras.getInt("id");
             if (value > 0) {
-                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString())) {
+                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString(), addresse.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
