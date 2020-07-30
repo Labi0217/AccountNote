@@ -45,7 +45,7 @@ public class FindPlace extends AppCompatActivity {
                 int id=Integer.parseInt(strArray[0]);
                 Bundle dataBundle = new Bundle();
                 dataBundle.putInt("id", id);
-                Intent intent = new Intent(getApplicationContext(), AddPlace.class);
+                Intent intent = new Intent(getApplicationContext(), FindPlace2.class);
                 intent.putExtras(dataBundle);
                 startActivity(intent);
             }

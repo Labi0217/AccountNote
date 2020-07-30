@@ -96,16 +96,6 @@
             android:layout_alignBottom="@id/contentT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/deleteB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/saveB"
-            android:onClick="delete"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:visibility="invisible"
-            android:text="삭제"/>
 
         <Button
             android:id="@+id/saveB"
@@ -124,8 +114,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="20dp"
             android:visibility="invisible"
-            android:onClick="edit"
-            android:text="수정"/>
+            android:onClick="check"
+            android:text="확인"/>
 
     </RelativeLayout>
 

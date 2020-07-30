@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parentrelative"
+    tools:context=".FindPlace2">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/parentrelative"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp">
+        <TextView
+            android:id="@+id/datereal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="48dp"
+            tools:layout_editor_absoluteY="46dp" />
+
+        <TextView
+            android:id="@+id/namereal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="177dp"
+            android:layout_below="@id/datereal"
+            tools:layout_editor_absoluteY="341dp" />
+
+        <TextView
+            android:id="@+id/costreal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/namereal"
+            android:layout_marginTop="100dp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="382dp" />
+
+        <TextView
+            android:id="@+id/contentreal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/costreal"
+            android:layout_marginTop="30dp"
+            tools:layout_editor_absoluteX="325dp"
+            tools:layout_editor_absoluteY="25dp" />
+
+        <TextView
+            android:id="@+id/addressreal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="textView"
+            android:layout_below="@id/contentreal"/>
+
+        <Button
+            android:id="@+id/editreal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below = "@id/addressreal"
+            android:layout_alignParentEnd="true"
+            android:text="수정"/>
+        <Button
+            android:id="@+id/deletereal"
+            android:onClick="delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/editreal"
+            android:text="삭제"/>
+
+    </RelativeLayout>
+</RelativeLayout>

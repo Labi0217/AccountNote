@@ -76,8 +76,6 @@ public class AddPlace extends AppCompatActivity {
             }
         });
 
-
-
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             int Value = extras.getInt("id");
@@ -142,30 +140,19 @@ public class AddPlace extends AppCompatActivity {
         }
 
 
-    public void delete(View view) {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            int Value = extras.getInt("id");
-            if (Value > 0) {
-                notedb.deleteNote(id);
-                Toast.makeText(getApplicationContext(), "삭제되었음", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(getApplicationContext(), "삭제되지 않았음", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void edit(View view) {
+    public void check(View view) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int value = extras.getInt("id");
             if (value > 0) {
                 if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString(), addresse.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent intent = new Intent(getApplicationContext(), FindPlace.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), FindPlace.class);
+                    startActivity(intent);
                 }
             }
         }
