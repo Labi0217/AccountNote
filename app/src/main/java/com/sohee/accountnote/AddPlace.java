@@ -34,8 +34,6 @@ public class AddPlace extends AppCompatActivity {
     TextView monthdate;
     @BindView(R.id.saveB)
     Button save1;
-    @BindView(R.id.deleteB)
-    Button delete1;
     @BindView(R.id.editB)
     Button edit1;
     @BindView(R.id.nameE)
@@ -92,7 +90,6 @@ public class AddPlace extends AppCompatActivity {
                     rs.close();
                 }
                 save1.setVisibility(View.INVISIBLE);
-                delete1.setVisibility(View.VISIBLE);
                 edit1.setVisibility(View.VISIBLE);
 
                 namee.setText(t);
