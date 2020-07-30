@@ -18,8 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NOTE_COST ="cost";
     public static final String NOTE_CONTENT = "content1";
     public static final String NOTE_DATE = "date";
-    public static final String NOTE_LOCATION = "location";
-    public static final String NOTE_ADDRESS = "address1";
+    public static final String NOTE_ADDRESS = "address0";
 
 
     public DBHelper(Context context) {
@@ -30,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table note " +
-                        "(id integer primary key,title text, cost text, content1 text, date text, address1 text)"
+                        "(id integer primary key,title text, cost text, content1 text, date text, address0 text)"
         );
     }
 
@@ -40,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertNote(String title, String cost, String content1, String date, String address1) {
+    public boolean insertNote(String title, String cost, String content1, String date, String address0) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -48,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
         contentValues.put("date", date);
-        contentValues.put("address1", address1);
+        contentValues.put("address0", address0);
 
         db.insert("note", null, contentValues);
         return true;
@@ -66,14 +65,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateNote(Integer id, String title, String cost, String content1, String date, String address1) {
+    public boolean updateNote(Integer id, String title, String cost, String content1, String date, String address0) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
         contentValues.put("cost", cost);
         contentValues.put("content1", content1);
         contentValues.put("date", date);
-        contentValues.put("address1", address1);
+        contentValues.put("address0", address0);
         db.update("note", contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }

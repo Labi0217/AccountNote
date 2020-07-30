@@ -12,6 +12,7 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class FindPlace extends AppCompatActivity {
@@ -38,8 +39,7 @@ public class FindPlace extends AppCompatActivity {
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long arg4) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long arg4) {
                 String item = (String) ((ListView) parent).getItemAtPosition(position);
                 String[] strArray = item.split(" ");
                 int id=Integer.parseInt(strArray[0]);
@@ -59,10 +59,10 @@ public class FindPlace extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                i = Calendar.YEAR;
+                i1 = Calendar.MONTH;
+                i2 = Calendar.YEAR;
 
-//                 i == year
-//                i1 == month
-//                i2 == day
             }
         });
 

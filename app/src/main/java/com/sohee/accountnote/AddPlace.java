@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -73,6 +76,8 @@ public class AddPlace extends AppCompatActivity {
             }
         });
 
+
+
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             int Value = extras.getInt("id");
@@ -84,7 +89,7 @@ public class AddPlace extends AppCompatActivity {
                 String c = rs.getString(rs.getColumnIndex(DBHelper.NOTE_COST));
                 String co = rs.getString(rs.getColumnIndex(DBHelper.NOTE_CONTENT));
                 String d = rs.getString(rs.getColumnIndex(DBHelper.NOTE_DATE));
-                String ad = rs.getString(rs.getColumnIndex(DBHelper.NOTE_ADDRESS));
+                String addre = rs.getString(rs.getColumnIndex(DBHelper.NOTE_ADDRESS));
                 if(!rs.isClosed()) {
                     rs.close();
                 }
@@ -96,7 +101,7 @@ public class AddPlace extends AppCompatActivity {
                 coste.setText(c);
                 contente.setText(co);
                 monthdate.setText(d);
-                addresse.setText(ad);
+                addresse.setText(addre);
             }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -125,16 +130,6 @@ public class AddPlace extends AppCompatActivity {
     public void insert(View view) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            int Value = extras.getInt("id");
-            if (Value > 0) {
-                if (notedb.updateNote(id, namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString(), addresse.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "수정되었음", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), FindPlace.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "수정되지 않았음", Toast.LENGTH_SHORT).show();
-                }
-            } else {
                 if (notedb.insertNote(namee.getText().toString(), coste.getText().toString(), contente.getText().toString(), monthdate.getText().toString(), addresse.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "추가되었음", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), FindPlace.class);
@@ -145,7 +140,7 @@ public class AddPlace extends AppCompatActivity {
                 finish();
             }
         }
-    }
+
 
     public void delete(View view) {
         Bundle extras = getIntent().getExtras();
@@ -177,7 +172,7 @@ public class AddPlace extends AppCompatActivity {
     }
     public void getDT() {
         Calendar cal = Calendar.getInstance();
-        int y=0, m=0, d=0, h=0, mi=0, s=0;
+        int y=0, m=0, d=0;
 
         y = cal.get(Calendar.YEAR);
         m = cal.get(Calendar.MONTH) +1;
@@ -185,4 +180,5 @@ public class AddPlace extends AppCompatActivity {
 
         monthdate.setText(y+"/"+m+"/"+d);
     }
+
 }

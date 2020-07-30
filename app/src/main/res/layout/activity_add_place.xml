@@ -54,13 +54,14 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="20dp"
             android:hint="[주소입력]"/>
+
         <ImageView
             android:id="@+id/imageView"
-            android:layout_below="@id/addressE"
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            android:layout_below="@id/addressE"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@android:mipmap/sym_def_app_icon" />
         <EditText
             android:id="@+id/nameE"
             android:layout_below="@id/imageView"
@@ -125,6 +126,7 @@
             android:visibility="invisible"
             android:onClick="edit"
             android:text="수정"/>
+
     </RelativeLayout>
 
 </RelativeLayout>
