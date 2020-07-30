@@ -31,7 +31,8 @@ public class FindPlace2 extends AppCompatActivity {
     TextView addresse;
     @BindView(R.id.editreal)
     Button editreal;
-
+    @BindView(R.id.deletereal)
+    Button deletereal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,9 @@ public class FindPlace2 extends AppCompatActivity {
                     rs.close();
                 }
 
+
                 namee.setText(t);
-                coste.setText(c);
+                coste.setText("[사용금액]\t"+c);
                 contente.setText(co);
                 monthdate.setText(d);
                 addresse.setText(addre);
@@ -87,8 +89,7 @@ public class FindPlace2 extends AppCompatActivity {
             if (Value > 0) {
                 notedb.deleteNote(id);
                 Toast.makeText(getApplicationContext(), "삭제되었음", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), FindPlace.class);
-                startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(getApplicationContext(), "삭제되지 않았음", Toast.LENGTH_SHORT).show();
             }

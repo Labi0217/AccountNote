@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindPlace2"></activity>
+        <activity android:name=".FindPlace2"/>
         <activity android:name=".FindPlace" />
         <activity android:name=".AddPlace" />
         <activity android:name=".MainActivity">

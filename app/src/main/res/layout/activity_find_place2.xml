@@ -8,7 +8,7 @@
     tools:context=".FindPlace2">
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/parentrelative"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
@@ -57,8 +57,8 @@
 
         <TextView
             android:id="@+id/addressreal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="130dp"
             android:layout_centerHorizontal="true"
             android:text="textView"
             android:layout_below="@id/contentreal"/>
@@ -67,8 +67,8 @@
             android:id="@+id/editreal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below = "@id/addressreal"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:text="수정"/>
         <Button
             android:id="@+id/deletereal"
@@ -76,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/editreal"
+            android:layout_alignParentBottom="true"
             android:text="삭제"/>
 
     </RelativeLayout>
